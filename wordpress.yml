@@ -3,10 +3,30 @@
   become: yes
 
   pre_tasks:
+
+    - name: Install de docker
+      yum:
+        name: "{{ item }}"
+        state: present
+      with_items:
+        - epel-release
+        - yum-utils
+        - device-mapper-persistent-data
+        - lvm2
+        - python3
+        - docker
+
+    - name: Start et enable du daemon docker
+      service:
+        name: docker
+        state: started
+        enabled: yes 
+
     - name: Install docker-compose
       yum:
         name: docker-compose
         state: present
+
     - name: Création du user www-data
       user: 
         name: www-data
