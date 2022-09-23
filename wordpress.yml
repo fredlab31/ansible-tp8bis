@@ -7,14 +7,9 @@
       yum:
         name: docker-compose
         state: present
-    - name: Création du groupe www-user
-      group:
-        name: www-data
-        state: present
     - name: Création du user www-data
       user: 
         name: www-data
-        group: www-data
 
   roles:
     - role: dirane-wordpress
